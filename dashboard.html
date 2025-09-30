@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | AI Workforce Cloud</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+        }
+        .sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: #4b5563 #111827;
+        }
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: #111827;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+            border-radius: 6px;
+        }
+        .drag-drop {
+            border: 2px dashed #4b5563;
+        }
+        .drag-drop.active {
+            border-color: #8b5cf6;
+            background-color: #1e1b4b;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar hidden md:flex md:flex-shrink-0 bg-gray-900 w-64 flex-col border-r border-gray-800 overflow-y-auto">
+            <div class="flex items-center justify-center h-16 px-4 border-b border-gray-800">
+                <div class="flex items-center space-x-2">
+                    <i data-feather="cpu" class="text-purple-400"></i>
+                    <span class="text-xl font-bold">AI Workforce Cloud</span>
+                </div>
+            </div>
+            <nav class="flex-1 px-4 py-4 space-y-1">
+                <a href="#" class="flex items-center px-4 py-3 bg-gray-800 rounded-lg text-white">
+                    <i data-feather="home" class="w-5 h-5 mr-3"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition">
+                    <i data-feather="users" class="w-5 h-5 mr-3"></i>
+                    AI Employees
+                </a>
+                <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition">
+                    <i data-feather="repeat" class="w-5 h-5 mr-3"></i>
+                    Workflows
+                </a>
+                <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition">
+                    <i data-feather="activity" class="w-5 h-5 mr-3"></i>
+                    Analytics
+                </a>
+                <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition">
+                    <i data-feather="link" class="w-5 h-5 mr-3"></i>
+                    Integrations
+                </a>
+                <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition">
+                    <i data-feather="credit-card" class="w-5 h-5 mr-3"></i>
+                    Billing
+                </a>
+                <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition">
+                    <i data-feather="settings" class="w-5 h-5 mr-3"></i>
+                    Settings
+                </a>
+            </nav>
+            <div class="p-4 border-t border-gray-800">
+                <div class="flex items-center">
+                    <img src="http://static.photos/people/200x200/10" alt="User" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-medium">John Founder</p>
+                        <p class="text-sm text-gray-400">john@startup.com</p>
+                    </div>
+                </div>
+                <button class="mt-4 w-full flex items-center justify-center px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
+                    <i data-feather="log-out" class="w-5 h-5 mr-2"></i>
+                    Sign Out
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Top Navigation -->
+            <header class="flex items-center justify-between h-16 px-6 bg-gray-900 border-b border-gray-800">
+                <div class="flex items-center md:hidden">
+                    <button class="text-gray-400 hover:text-white">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+                <div class="flex-1 max-w-md mx-4">
+                    <div class="relative">
+                        <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" placeholder="Search..." class="w-full pl-10 pr-4 py-2 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-400 hover:text-white relative">
+                        <i data-feather="bell"></i>
+                        <span class="absolute top-0 right-0 w-2 h-2 bg-purple-500 rounded-full"></span>
+                    </button>
+                    <button class="text-gray-400 hover:text-white">
+                        <i data-feather="help-circle"></i>
+                    </button>
+                    <div class="md:hidden">
+                        <img src="http://static.photos/people/200x200/10" alt="User" class="w-8 h-8 rounded-full">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <main class="p-6">
+                <!-- Welcome Banner -->
+                <div class="bg-gradient-to-r from-purple-900/50 to-blue-900/50 rounded-xl p-6 mb-8 border border-gray-700">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold mb-2">Welcome back, John</h1>
+                            <p class="text-gray-300">Your AI team is currently executing 12 tasks across 5 workflows.</p>
+                        </div>
+                        <button class="mt-4 md:mt-0 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition">
+                            <i data-feather="plus" class="inline mr-2"></i> Hire New AI Employee
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-400">AI Employees</p>
+                                <h3 class="text-2xl font-bold mt-1">8</h3>
+                            </div>
+                            <div class="p-3 bg-purple-500/20 rounded-lg">
+                                <i data-feather="users" class="text-purple-400"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-green-400 mt-4">
+                            <i data-feather="arrow-up" class="inline w-4 h-4"></i> 2 new this week
+                        </p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-400">Active Workflows</p>
+                                <h3 class="text-2xl font-bold mt-1">5</h3>
+                            </div>
+                            <div class="p-3 bg-blue-500/20 rounded-lg">
+                                <i data-feather="repeat" class="text-blue-400"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-green-400 mt-4">
+                            <i data-feather="arrow-up" class="inline w-4 h-4"></i> 3 running now
+                        </p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-400">Tasks Completed</p>
+                                <h3 class="text-2xl font-bold mt-1">1,248</h3>
+                            </div>
+                            <div class="p-3 bg-green-500/20 rounded-lg">
+                                <i data-feather="check-circle" class="text-green-400"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-green-400 mt-4">
+                            <i data-feather="arrow-up" class="inline w-4 h-4"></i> 12.5% from last week
+                        </p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-gray-400">Monthly Savings</p>
+                                <h3 class="text-2xl font-bold mt-1">$8,760</h3>
+                            </div>
+                            <div class="p-3 bg-yellow-500/20 rounded-lg">
+                                <i data-feather="dollar-sign" class="text-yellow-400"></i>
+                            </div>
+                        </div>
+                        <p class="text-sm text-green-400 mt-4">
+                            <i data-feather="arrow-up" class="inline w-4 h-4"></i> vs human team costs
+                        </p>
+                    </div>
+                </div>
+
+                <!-- AI Employees Section -->
+                <div class="bg-gray-800 rounded-xl p-6 mb-8 border border-gray-700">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Your AI Team</h2>
+                        <button class="flex items-center text-sm text-purple-400 hover:text-purple-300">
+                            <i data-feather="filter" class="w-4 h-4 mr-2"></i> Filter
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- AI Employee Card -->
+                        <div class="bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-purple-500 transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center mb-2">
+                                        <i data-feather="code" class="text-blue-400"></i>
+                                    </div>
+                                    <h3 class="font-bold">AI Software Engineer</h3>
+                                    <p class="text-sm text-gray-400">Full-stack development</p>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <span class="px-2 py-1 bg-blue-900/50 text-blue-300 rounded-full text-xs">Active</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <div>
+                                    <p class="text-gray-400">Tasks</p>
+                                    <p class="font-medium">14 today</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Status</p>
+                                    <p class="text-green-400 font-medium">Running</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Employee Card -->
+                        <div class="bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-purple-500 transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mb-2">
+                                        <i data-feather="cloud" class="text-purple-400"></i>
+                                    </div>
+                                    <h3 class="font-bold">AI DevOps</h3>
+                                    <p class="text-sm text-gray-400">Cloud infrastructure</p>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <span class="px-2 py-1 bg-green-900/50 text-green-300 rounded-full text-xs">Optimized</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <div>
+                                    <p class="text-gray-400">Tasks</p>
+                                    <p class="font-medium">8 today</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Status</p>
+                                    <p class="text-green-400 font-medium">Running</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Employee Card -->
+                        <div class="bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-purple-500 transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mb-2">
+                                        <i data-feather="bar-chart-2" class="text-green-400"></i>
+                                    </div>
+                                    <h3 class="font-bold">AI Data Analyst</h3>
+                                    <p class="text-sm text-gray-400">Insights & reporting</p>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <span class="px-2 py-1 bg-purple-900/50 text-purple-300 rounded-full text-xs">Processing</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <div>
+                                    <p class="text-gray-400">Tasks</p>
+                                    <p class="font-medium">5 today</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Status</p>
+                                    <p class="text-yellow-400 font-medium">Pending</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Employee Card -->
+                        <div class="bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-purple-500 transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center mb-2">
+                                        <i data-feather="mail" class="text-pink-400"></i>
+                                    </div>
+                                    <h3 class="font-bold">AI Support Agent</h3>
+                                    <p class="text-sm text-gray-400">Customer service</p>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <span class="px-2 py-1 bg-pink-900/50 text-pink-300 rounded-full text-xs">24/7</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center text-sm">
+                                <div>
+                                    <p class="text-gray-400">Tasks</p>
+                                    <p class="font-medium">32 today</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Status</p>
+                                    <p class="text-green-400 font-medium">Running</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mt-6 w-full flex items-center justify-center py-3 border border-dashed border-gray-600 rounded-lg hover:border-gray-500 transition">
+                        <i data-feather="plus" class="w-5 h-5 mr-2"></i> Hire Additional AI Employee
+                    </button>
+                </div>
+
+                <!-- Workflows & Activity -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Workflow Builder -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold">Workflow Builder</h2>
+                            <button class="text-sm text-purple-400 hover:text-purple-300">
+                                View All (5)
+                            </button>
+                        </div>
+                        <div class="drag-drop rounded-lg p-4 mb-4 transition" id="workflow-dropzone">
+                            <p class="text-center text-gray-400">Drag & drop AI employees to create workflows</p>
+                            <div class="flex flex-wrap gap-2 mt-4 justify-center" id="workflow-items">
+                                <div class="flex items-center px-3 py-2 bg-gray-900 rounded-lg">
+                                    <i data-feather="user" class="w-4 h-4 mr-2 text-blue-400"></i>
+                                    <span class="text-sm">Software Engineer</span>
+                                </div>
+                                <div class="flex items-center px-3 py-2 bg-gray-900 rounded-lg">
+                                    <i data-feather="cloud" class="w-4 h-4 mr-2 text-purple-400"></i>
+                                    <span class="text-sm">DevOps</span>
+                                </div>
+                                <div class="flex items-center px-3 py-2 bg-gray-900 rounded-lg">
+                                    <i data-feather="bar-chart-2" class="w-4 h-4 mr-2 text-green-400"></i>
+                                    <span class="text-sm">Data Analyst</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <button class="px-4 py-2 text-gray-400 hover:text-white">
+                                <i data-feather="trash-2" class="w-4 h-4 mr-2"></i> Clear
+                            </button>
+                            <button class="px-6 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition">
+                                <i data-feather="save" class="w-4 h-4 mr-2"></i> Save Workflow
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold">Recent Activity</h2>
+                            <button class="text-sm text-purple-400 hover:text-purple-300">
+                                View All
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                                        <i data-feather="code" class="w-4 h-4 text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">AI Software Engineer deployed v1.2.0 to production</p>
+                                    <p class="text-xs text-gray-400 mt-1">10 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8 rounded-full bg-pink-500/20 flex items-center justify-center">
+                                        <i data-feather="mail" class="w-4 h-4 text-pink-400"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">AI Support Agent resolved 8 customer tickets</p>
+                                    <p class="text-xs text-gray-400 mt-1">25 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                                        <i data-feather="bar-chart-2" class="w-4 h-4 text-green-400"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">AI Data Analyst generated Q3 revenue report</p>
+                                    <p class="text-xs text-gray-400 mt-1">1 hour ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+                                        <i data-feather="cloud" class="w-4 h-4 text-purple-400"></i>
+                                    </div>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">AI DevOps optimized AWS costs by 18%</p>
+                                    <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integrations -->
+                <div class="bg-gray-800 rounded-xl p-6 mt-8 border border-gray-700">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-bold">Connected Integrations</h2>
+                        <button class="flex items-center text-sm text-purple-400 hover:text-purple-300">
+                            <i data-feather="plus" class="w-4 h-4 mr-2"></i> Add Integration
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <div class="bg-gray-900 rounded-lg p-4 flex flex-col items-center border border-gray-700 hover:border-purple-500 transition">
+                            <img src="https://cdn.worldvectorlogo.com/logos/github-icon-1.svg" alt="GitHub" class="w-10 h-10 mb-3">
+                            <span class="text-sm font-medium">GitHub</span>
+                            <span class="text-xs text-green-400 mt-1">Connected</span>
+                        </div>
+                        <div class="bg-gray-900 rounded-lg p-4 flex flex-col items-center border border-gray-700 hover:border-purple-500 transition">
+                            <img src="https://cdn.worldvectorlogo.com/logos/aws-logo.svg" alt="AWS" class="w-10 h-10 mb-3">
+                            <span class="text-sm font-medium">AWS</span>
+                            <span class="text-xs text-green-400 mt-1">Connected</span>
+                        </div>
+                        <div class="bg-gray-900 rounded-lg p-4 flex flex-col items-center border border-gray-700 hover:border-purple-500 transition">
+                            <img src="https://cdn.worldvectorlogo.com/logos/stripe-4.svg" alt="Stripe" class="w-10 h-10 mb-3">
+                            <span class="text-sm font-medium">Stripe</span>
+                            <span class="text-xs text-green-400 mt-1">Connected</span>
+                        </div>
+                        <div class="bg-gray-900 rounded-lg p-4 flex flex-col items-center border border-gray-700 hover:border-purple-500 transition">
+                            <img src="https://cdn.worldvectorlogo.com/logos/google-ads.svg" alt="Google Ads" class="w-10 h-10 mb-3">
+                            <span class="text-sm font-medium">Google Ads</span>
+                            <span class="text-xs text-green-400 mt-1">Connected</span>
+                        </div>
+                        <div class="bg-gray-900 rounded-lg p-4 flex flex-col items-center border border-gray-700 hover:border-purple-500 transition">
+                            <img src="https://cdn.worldvectorlogo.com/logos/twilio.svg" alt="Twilio" class="w-10 h-10 mb-3">
+                            <span class="text-sm font-medium">Twilio</span>
+                            <span class="text-xs text-green-400 mt-1">Connected</span>
+                        </div>
+                        <div class="bg-gray-900 rounded-lg p-4 flex flex-col items-center border border-gray-700">
+                            <div class="w-10 h-10 mb-3 bg-gray-800 rounded-full flex items-center justify-center">
+                                <i data-feather="plus" class="text-gray-400"></i>
+                            </div>
+                            <span class="text-sm font-medium">Add New</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            feather.replace();
+            
+            // Simple drag and drop functionality for workflow builder
+            const dropzone = document.getElementById('workflow-dropzone');
+            const workflowItems = document.getElementById('workflow-items');
+            
+            // Make workflow items draggable
+            document.querySelectorAll('#workflow-items > div').forEach(item => {
+                item.setAttribute('draggable', 'true');
+                
+                item.addEventListener('dragstart', () => {
+                    item.classList.add('opacity-50');
+                });
+                
+                item.addEventListener('dragend', () => {
+                    item.classList.remove('opacity-50');
+                });
+            });
+            
+            // Dropzone highlight
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.classList.add('active');
+            });
+            
+            ['dragleave', 'dragend'].forEach(type => {
+                dropzone.addEventListener(type, () => {
+                    dropzone.classList.remove('active');
+                });
+            });
+            
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
